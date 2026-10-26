@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>AURORA YOGA — студия йоги и wellness</title>
+<style>
+/* ============ RESET ============ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  background:#0a0f0f;color:#fff;line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+/* ============ TOKENS ============ */
+:root{
+  --bg-dark:#0a0f0f;
+  --bg-card:#111918;
+  --bg-elevated:#16201f;
+  --accent:#3ee6d0;
+  --accent-glow:rgba(62,230,208,0.25);
+  --accent-soft:#2bb8a6;
+  --text-muted:#a0b8b5;
+  --white:#ffffff;
+  --border-light:rgba(62,230,208,0.2);
+  --radius:24px;
+  --radius-sm:16px;
+  --transition:all .3s cubic-bezier(.2,.9,.4,1);
+  --shadow:0 20px 40px -12px rgba(0,0,0,.8);
+}
+
+/* ============ TYPO ============ */
+h1,h2,h3,h4{font-weight:500;letter-spacing:-.02em;line-height:1.15}
+h2{font-size:clamp(1.6rem,4.5vw,3rem);margin-bottom:1.25rem;overflow-wrap:anywhere}
+h2 span{color:var(--accent);font-weight:400}
+h3{font-size:clamp(1.15rem,2.5vw,1.5rem);margin-bottom:.7rem;overflow-wrap:anywhere}
+p{overflow-wrap:anywhere}
+a{text-decoration:none;color:inherit}
+
+.section{padding:clamp(3rem,6vw,5rem) clamp(1rem,4vw,1.5rem);max-width:1280px;margin:0 auto}
+.section-header{margin-bottom:clamp(2rem,4vw,3rem)}
+.section-header p{color:var(--text-muted);font-size:clamp(1rem,2vw,1.2rem);max-width:700px}
+
+/* ============ BUTTONS ============ */
+.btn{
+  display:inline-block;background:transparent;
+  border:1.5px solid var(--accent);color:var(--accent);
+  padding:.85rem 2rem;border-radius:60px;
+  font-weight:500;font-size:clamp(.9rem,2vw,1rem);
+  letter-spacing:.3px;transition:var(--transition);
+  cursor:pointer;text-align:center;
+  box-shadow:0 0 0 0 var(--accent-glow);
+  max-width:100%;white-space:normal;overflow-wrap:anywhere;
+}
+.btn:hover{
+  background:var(--accent);color:#0a0f0f;
+  box-shadow:0 0 25px 0 var(--accent-glow);
+  transform:translateY(-2px);
+}
+.btn-primary{
+  background:var(--accent);color:#0a0f0f;border:none;
+  font-weight:600;padding:.95rem 2.4rem;
+}
+.btn-primary:hover{
+  background:#5cf0dd;box-shadow:0 0 30px 0 var(--accent);
+  transform:scale(1.02) translateY(-2px);color:#000;
+}
+@media (max-width:360px){
+  .btn{padding:.7rem 1.2rem;font-size:.85rem}
+  .btn-primary{padding:.85rem 1.4rem}
+}
+
+/* ============ NAV ============ */
+.navbar{
+  position:sticky;top:0;z-index:1000;
+  background:rgba(10,15,15,.85);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border-light);
+  padding:.75rem clamp(.8rem,3vw,1.5rem);
+}
+.nav-container{
+  max-width:1280px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:.6rem 1rem;
+}
+.logo{font-size:clamp(1.15rem,3vw,1.6rem);font-weight:600;letter-spacing:-.5px;color:#fff;transition:var(--transition)}
+.logo span{color:var(--accent);font-weight:400}
+.logo:hover{text-shadow:0 0 15px var(--accent-glow)}
+.nav-links{display:flex;flex-wrap:wrap;gap:.8rem 1.2rem;align-items:center;list-style:none}
+.nav-links a{font-size:clamp(.75rem,1.6vw,.95rem);color:var(--text-muted);transition:var(--transition);position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1.5px;background:var(--accent);transition:var(--transition)}
+.nav-links a:hover{color:var(--accent)}
+.nav-links a:hover::after{width:100%}
+
+/* ============ HERO (FIX #1) ============ */
+.hero{
+  min-height:clamp(70vh,90vh,90vh);
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;
+  padding:clamp(3rem,8vw,5rem) clamp(1rem,4vw,1.5rem);
+  background:radial-gradient(circle at 30% 40%,#0f1e1c 0%,#0a0f0f 80%);
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;width:min(500px,80vw);height:min(500px,80vw);
+  background:radial-gradient(circle,rgba(62,230,208,.08) 0%,transparent 70%);
+  top:-100px;right:-100px;border-radius:50%;pointer-events:none;
+}
+.hero-content{max-width:800px;position:relative;z-index:2;animation:fadeInUp 1s ease-out}
+.hero h1{
+  font-size:clamp(2rem,6vw,4.8rem);   /* FIX: нижняя граница снижена с 2.8 до 2rem */
+  font-weight:500;line-height:1.1;margin-bottom:1.25rem;
+  overflow-wrap:anywhere;              /* FIX: не даёт слогану переполняться */
+  word-break:break-word;
+}
+.hero h1 span{color:var(--accent);display:block;font-weight:300;text-shadow:0 0 30px var(--accent-glow)}
+.hero p{
+  font-size:clamp(1rem,2.5vw,1.3rem);  /* FIX: адаптивный размер описания */
+  color:var(--text-muted);
+  margin:0 auto 2.2rem;max-width:600px;
+  overflow-wrap:anywhere;
+}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+/* ============ GRIDS ============ */
+.grid-2,.grid-3,.grid-4{display:grid;gap:clamp(1rem,2.5vw,2rem)}
+.grid-2{grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr))}
+.grid-3{grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr))}
+.grid-4{grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr))}
+
+/* ============ CARDS ============ */
+.card{
+  background:var(--bg-card);border:1px solid var(--border-light);
+  border-radius:var(--radius);padding:clamp(1.2rem,3vw,2rem);
+  transition:var(--transition);backdrop-filter:blur(4px);
+  box-shadow:var(--shadow);display:flex;flex-direction:column;
+  min-width:0;overflow-wrap:anywhere;
+}
+.card:hover{
+  transform:translateY(-6px);border-color:var(--accent);
+  box-shadow:0 25px 35px -10px rgba(62,230,208,.15);
+}
+.card p{color:var(--text-muted);font-size:clamp(.9rem,1.8vw,.98rem)}
+.price{font-size:clamp(1.4rem,3vw,1.8rem);font-weight:600;color:var(--accent);margin:.7rem 0 .3rem}
+.price small{font-size:.85rem;color:var(--text-muted);font-weight:400}
+
+/* ============ INSTRUCTORS ============ */
+.instructor-card{
+  background:var(--bg-card);border:1px solid var(--border-light);
+  border-radius:var(--radius);padding:clamp(1.2rem,3vw,2rem);
+  text-align:center;transition:var(--transition);min-width:0;
+}
+.instructor-card:hover{border-color:var(--accent);transform:scale(1.02);box-shadow:0 0 30px -8px var(--accent-glow)}
+.instructor-avatar{
+  width:clamp(90px,15vw,120px);height:clamp(90px,15vw,120px);border-radius:50%;
+  background:linear-gradient(145deg,#1e2e2b,#0f1a19);
+  border:2px solid var(--accent);margin:0 auto 1.2rem;
+  display:flex;align-items:center;justify-content:center;
+  font-size:clamp(2rem,5vw,3rem);color:var(--accent);
+  box-shadow:0 0 20px var(--accent-glow);transition:var(--transition);
+}
+.instructor-card:hover .instructor-avatar{box-shadow:0 0 35px var(--accent);transform:scale(1.03)}
+.instructor-name{font-size:clamp(1.1rem,2.3vw,1.35rem);font-weight:500;margin-bottom:.3rem;overflow-wrap:anywhere}
+.instructor-spec{color:var(--accent);font-size:.85rem;font-weight:400;letter-spacing:.5px;text-transform:uppercase;margin-bottom:.7rem}
+.instructor-desc{color:var(--text-muted);font-size:clamp(.85rem,1.8vw,.95rem)}
+
+/* ============ BADGES / REVIEWS ============ */
+.badge-grid{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.2rem}
+.badge{
+  background:var(--bg-elevated);border:1px solid var(--border-light);
+  border-radius:40px;padding:.5rem 1.1rem;
+  font-size:clamp(.78rem,1.6vw,.9rem);color:var(--text-muted);
+  transition:var(--transition);overflow-wrap:anywhere;
+}
+.badge:hover{border-color:var(--accent);color:var(--accent);box-shadow:0 0 15px var(--accent-glow)}
+.review{
+  background:var(--bg-card);border-left:3px solid var(--accent);
+  padding:clamp(1.2rem,3vw,1.8rem);border-radius:var(--radius-sm);
+  transition:var(--transition);min-width:0;
+}
+.review:hover{background:#16201f;border-left-width:6px}
+.review-text{font-style:italic;color:#d0e0dd}
+.review-author{margin-top:.8rem;color:var(--accent);font-weight:500}
+
+/* ============ MERCH (FIX #2) ============ */
+.merch-grid{
+  display:grid;gap:clamp(1rem,2.5vw,1.5rem);
+  grid-template-columns:repeat(4,1fr);   /* явная сетка 4 колонки */
+}
+.merch-card{
+  background:var(--bg-card);border:1px solid var(--border-light);
+  border-radius:var(--radius);padding:clamp(1rem,2.5vw,1.5rem);
+  text-align:center;transition:var(--transition);
+  min-width:0;display:flex;flex-direction:column;
+  justify-content:flex-start;overflow-wrap:anywhere;
+}
+.merch-card:hover{transform:translateY(-6px) scale(1.01);border-color:var(--accent);box-shadow:0 20px 30px -12px var(--accent-glow)}
+.merch-img{
+  font-size:clamp(2.4rem,5vw,4rem);
+  aspect-ratio:1/1;                       /* FIX: фиксация пропорций */
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:.9rem;
+  filter:drop-shadow(0 0 12px var(--accent-glow));
+  transition:var(--transition);
+}
+.merch-card:hover .merch-img{filter:drop-shadow(0 0 20px var(--accent));transform:scale(1.08)}
+.merch-card h3{font-size:clamp(1rem,2vw,1.15rem)}
+.merch-card p{color:var(--text-muted);font-size:clamp(.82rem,1.7vw,.92rem);flex:1}
+
+/* явные брейкпоинты для мерча */
+@media (max-width:900px){
+  .merch-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:480px){
+  .merch-grid{grid-template-columns:1fr}
+}
+
+/* ============ BONUS (FIX #5) ============ */
+.bonus-block{
+  background:linear-gradient(135deg,#111918 0%,#0f1e1c 100%);
+  border-radius:var(--radius);padding:clamp(1.4rem,3vw,2.5rem);
+  border:1px solid var(--border-light);transition:var(--transition);
+  min-width:0;display:flex;flex-direction:column;
+}
+.bonus-block:hover{border-color:var(--accent);box-shadow:0 0 40px -10px var(--accent-glow)}
+.bonus-block .btn{
+  margin-top:1.2rem;align-self:flex-start;
+  max-width:100%;white-space:normal;   /* FIX: кнопка не выходит за край */
+}
+@media (max-width:360px){
+  .bonus-block .btn{padding:.7rem 1.1rem;font-size:.85rem;align-self:stretch}
+}
+
+/* ============ LEVELS ============ */
+.level-card{
+  background:var(--bg-card);border:1px solid var(--border-light);
+  border-radius:var(--radius);padding:clamp(1.4rem,3vw,2rem);
+  text-align:center;transition:var(--transition);min-width:0;
+}
+.level-card:hover{border-color:var(--accent);background:#16201f;transform:translateY(-4px)}
+.level-icon{font-size:clamp(1.8rem,4vw,2.5rem);margin-bottom:.8rem}
+
+/* ============ CONTACTS ============ */
+.contact-item{display:flex;gap:.9rem;align-items:flex-start;margin-bottom:1.2rem;min-width:0}
+.contact-icon{color:var(--accent);font-size:1.4rem;min-width:1.8rem;flex-shrink:0}
+.social-links{display:flex;flex-wrap:wrap;gap:1rem 1.5rem;margin-top:1.2rem}
+.social-links a{color:var(--text-muted);font-size:.95rem;transition:var(--transition);border-bottom:1px solid transparent;overflow-wrap:anywhere}
+.social-links a:hover{color:var(--accent);border-bottom-color:var(--accent);transform:translateY(-2px)}
+
+/* ============ FORM (FIX #3, #4) ============ */
+.form-card{
+  background:var(--bg-card);border:1px solid var(--border-light);
+  border-radius:var(--radius);padding:clamp(1.4rem,3vw,2.2rem);
+  transition:var(--transition);min-width:0;
+}
+.form-card:hover{border-color:var(--accent);box-shadow:0 0 40px -10px var(--accent-glow)}
+.form-group{margin-bottom:1.1rem}
+.form-group label{display:block;font-size:.88rem;color:var(--text-muted);margin-bottom:.4rem}
+.form-group input,
+.form-group select{
+  width:100%;padding:.85rem 1rem;border-radius:12px;
+  background:#0d1413;border:1px solid var(--border-light);
+  color:#fff;font-size:1rem;font-family:inherit;
+  transition:var(--transition);outline:none;min-width:0;
+}
+.form-group input:focus,
+.form-group select:focus{
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px var(--accent-glow);
+}
+.form-group input.error{border-color:#ff6b6b;box-shadow:0 0 0 3px rgba(255,107,107,.2)}
+.form-error{color:#ff6b6b;font-size:.82rem;margin-top:.3rem;min-height:1.1em;display:block}
+.form-success{
+  margin-top:1rem;padding:.9rem 1.1rem;border-radius:12px;
+  background:rgba(62,230,208,.12);border:1px solid var(--accent);
+  color:var(--accent);font-size:.95rem;display:none;
+}
+.form-success.show{display:block;animation:fadeInUp .4s ease-out}
+
+/* ============ FOOTER ============ */
+.footer{border-top:1px solid var(--border-light);padding:2rem 1.5rem;text-align:center;color:var(--text-muted);font-size:.9rem}
+
+/* ============ SCROLLBAR ============ */
+::-webkit-scrollbar{width:8px}
+::-webkit-scrollbar-track{background:#0a0f0f}
+::-webkit-scrollbar-thumb{background:#1e3a37;border-radius:20px}
+::-webkit-scrollbar-thumb:hover{background:var(--accent)}
+
+/* ============ UTIL ============ */
+.text-accent{color:var(--accent)}
+.mt-2{margin-top:1rem}.mt-3{margin-top:2rem}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="#" class="logo">AURORA <span>YOGA</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">О студии</a></li>
+      <li><a href="#instructors">Инструкторы</a></li>
+      <li><a href="#achievements">Достижения</a></li>
+      <li><a href="#merch">Мерч</a></li>
+      <li><a href="#bonus">Бонусы</a></li>
+      <li><a href="#levels">Направления</a></li>
+      <li><a href="#contacts">Контакты</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>AURORA <span>YOGA</span></h1>
+    <p>Пространство гармонии, дыхания и внутреннего света. Йога, медитация и wellness в самом сердце Санкт-Петербурга.</p>
+    <a href="#form" class="btn btn-primary">Записаться на пробное занятие</a>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section id="about" class="section">
+  <div class="section-header">
+    <h2>О <span>студии</span></h2>
+    <p>Мы создаём место, где каждый может замедлиться, услышать себя и найти баланс.</p>
+  </div>
+  <div class="grid-2">
+    <div class="card">
+      <h3>Философия</h3>
+      <p>AURORA YOGA — это не просто студия. Это пространство осознанности, где древние практики соединяются с современным ритмом жизни. Мы верим, что йога доступна каждому, независимо от уровня подготовки и гибкости. Наша миссия — помочь вам обрести внутреннюю опору и энергию через дыхание, движение и медитацию.</p>
+    </div>
+    <div class="card">
+      <h3>История</h3>
+      <p>Студия основана в 2018 году Анной Волковой. Начав с небольших групп в уютном зале на Рубинштейна, мы выросли в два филиала и сообщество из более чем 500 практикующих. За это время мы провели десятки ретритов, обучили инструкторов и создали атмосферу, в которую хочется возвращаться.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INSTRUCTORS ============ -->
+<section id="instructors" class="section">
+  <div class="section-header">
+    <h2>Наши <span>инструкторы</span></h2>
+    <p>Профессионалы с многолетним опытом и глубокими знаниями традиций йоги.</p>
+  </div>
+  <div class="grid-3">
+    <div class="instructor-card">
+      <div class="instructor-avatar">🧘‍♀️</div>
+      <div class="instructor-name">Анна Сергеевна Волкова</div>
+      <div class="instructor-spec">Виньяса &amp; Хатха</div>
+      <p class="instructor-desc">Основатель студии, сертифицированный инструктор (RYT 500). Проводит динамичные и выверенные практики, уделяя внимание выравниванию и дыханию.</p>
+    </div>
+    <div class="instructor-card">
+      <div class="instructor-avatar">🧘</div>
+      <div class="instructor-name">Мария Александровна Соколова</div>
+      <div class="instructor-spec">Медитация &amp; Инь-йога</div>
+      <p class="instructor-desc">Специалист по глубокому расслаблению и работе с вниманием. Помогает найти тишину внутри и восстановить ресурс.</p>
+    </div>
+    <div class="instructor-card">
+      <div class="instructor-avatar">🌬️</div>
+      <div class="instructor-name">Дмитрий Игоревич Орлов</div>
+      <div class="instructor-spec">Пранаяма &amp; Дыхание</div>
+      <p class="instructor-desc">Эксперт по дыхательным техникам. Учит управлять энергией через осознанное дыхание и расширять границы возможностей.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ACHIEVEMENTS ============ -->
+<section id="achievements" class="section">
+  <div class="section-header">
+    <h2>Достижения и <span>отзывы</span></h2>
+    <p>Сертификаты инструкторов и слова наших учеников.</p>
+  </div>
+  <div class="grid-2" style="margin-bottom:2.5rem">
+    <div class="card">
+      <h3>Сертификаты и заслуги</h3>
+      <div class="badge-grid">
+        <span class="badge">RYT 500 (Yoga Alliance)</span>
+        <span class="badge">Сертификат по пранаяме (Индия, 2021)</span>
+        <span class="badge">Инструктор по медитации (Mindfulness, 2022)</span>
+        <span class="badge">Организатор 12 ретритов</span>
+        <span class="badge">Студия года 2023</span>
+        <span class="badge">500+ довольных учеников</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Достижения Анны Волковой</h3>
+      <div class="badge-grid">
+        <span class="badge">Сертифицированный инструктор RYT 500</span>
+        <span class="badge">Обучение в Ришикеше (Индия)</span>
+        <span class="badge">Автор курса «Дыхание и баланс»</span>
+        <span class="badge">Спикер YogaFest 2024</span>
+        <span class="badge">Наставник 30+ инструкторов</span>
+      </div>
+    </div>
+  </div>
+  <div class="grid-3">
+    <div class="review">
+      <p class="review-text">«Занятия с Анной изменили моё отношение к телу. Появилась лёгкость и уверенность. Атмосфера студии — волшебная!»</p>
+      <div class="review-author">— Екатерина М.</div>
+    </div>
+    <div class="review">
+      <p class="review-text">«Медитация с Марией — это глубокое погружение. Наконец-то научилась расслабляться по-настоящему.»</p>
+      <div class="review-author">— Дмитрий К.</div>
+    </div>
+    <div class="review">
+      <p class="review-text">«Пранаяма с Дмитрием — мощная практика. Стало больше энергии и спокойствия в повседневной жизни.»</p>
+      <div class="review-author">— Ольга В.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MERCH (FIX #2) ============ -->
+<section id="merch" class="section">
+  <div class="section-header">
+    <h2>Мерч <span>AURORA YOGA</span></h2>
+    <p>Создан для комфортной практики и вдохновения.</p>
+  </div>
+  <div class="merch-grid">
+    <div class="merch-card">
+      <div class="merch-img">🧘‍♀️</div>
+      <h3>Коврик для йоги</h3>
+      <p>Нескользящий, 6 мм, с логотипом студии.</p>
+      <div class="price">4 900 ₽</div>
+    </div>
+    <div class="merch-card">
+      <div class="merch-img">👕</div>
+      <h3>Топ для практики</h3>
+      <p>Дышащая ткань, мягкий бирюзовый акцент.</p>
+      <div class="price">2 800 ₽</div>
+    </div>
+    <div class="merch-card">
+      <div class="merch-img">🧥</div>
+      <h3>Худи AURORA</h3>
+      <p>Уютное худи с фирменным принтом.</p>
+      <div class="price">5 200 ₽</div>
+    </div>
+    <div class="merch-card">
+      <div class="merch-img">💧</div>
+      <h3>Бутылка для воды</h3>
+      <p>Эко-бутылка 600 мл, матовое покрытие.</p>
+      <div class="price">1 500 ₽</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ANNA'S MERITS ============ -->
+<section class="section" style="padding-top:0">
+  <div class="section-header">
+    <h2>Анна Волкова — <span>заслуги и сертификаты</span></h2>
+    <p>Основатель и главный инструктор студии.</p>
+  </div>
+  <div class="grid-2">
+    <div class="card">
+      <h3>Профессиональный путь</h3>
+      <div class="badge-grid">
+        <span class="badge">RYT 500 (Yoga Alliance, 2019)</span>
+        <span class="badge">Курс анатомии для йоги (2020)</span>
+        <span class="badge">Сертификат по виньяса-флоу (2021)</span>
+        <span class="badge">Преподаватель хатха-йоги с 2015 года</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Особые достижения</h3>
+      <div class="badge-grid">
+        <span class="badge">Автор онлайн-курса «Йога для начинающих»</span>
+        <span class="badge">1000+ групповых занятий</span>
+        <span class="badge">Участник фестиваля YogaJournal</span>
+        <span class="badge">Организатор ретритов на Байкале и в Карелии</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BONUS (FIX #5) ============ -->
+<section id="bonus" class="section">
+  <div class="section-header">
+    <h2>Бонусная <span>программа</span></h2>
+    <p>Начните свой путь с пробного занятия или выберите удобный формат.</p>
+  </div>
+  <div class="grid-3">
+    <div class="bonus-block">
+      <h3>Пробное занятие</h3>
+      <div class="price">0 ₽ <small>первое посещение</small></div>
+      <p>Любое групповое занятие для знакомства со студией и инструктором.</p>
+      <a href="#form" class="btn">Записаться</a>
+    </div>
+    <div class="bonus-block">
+      <h3>Месячный абонемент</h3>
+      <div class="price">7 900 ₽ <small>/ месяц</small></div>
+      <p>Неограниченное количество групповых занятий (все направления).</p>
+      <a href="#form" class="btn">Купить</a>
+    </div>
+    <div class="bonus-block">
+      <h3>Индивидуальное занятие</h3>
+      <div class="price">3 500 ₽ <small>/ 60 мин</small></div>
+      <p>Персональная практика с инструктором под ваши задачи.</p>
+      <a href="#form" class="btn">Записаться</a>
+    </div>
+  </div>
+  <p style="color:var(--text-muted);margin-top:1.5rem;font-size:.95rem">* При покупке абонемента на 3 месяца — скидка 10%. Студентам — скидка 15%.</p>
+</section>
+
+<!-- ============ FORM (FIX #3, #4) ============ -->
+<section id="form" class="section">
+  <div class="section-header">
+    <h2>Заявка на <span>занятие</span></h2>
+    <p>Оставьте контакты — мы свяжемся с вами в течение 15 минут.</p>
+  </div>
+  <div class="grid-2">
+    <div class="form-card">
+      <form id="bookingForm" novalidate>
+        <div class="form-group">
+          <label for="name">Ваше имя</label>
+          <input type="text" id="name" name="name" placeholder="Как к вам обращаться" autocomplete="name">
+          <span class="form-error" data-for="name"></span>
+        </div>
+        <div class="form-group">
+          <label for="phone">Телефон</label>
+          <input type="tel" id="phone" name="phone" placeholder="+7 (___) ___-__-__" inputmode="tel" autocomplete="tel">
+          <span class="form-error" data-for="phone"></span>
+        </div>
+        <div class="form-group">
+          <label for="direction">Направление</label>
+          <select id="direction" name="direction">
+            <option value="">Выберите направление</option>
+            <option>Виньяса &amp; Хатха</option>
+            <option>Медитация &amp; Инь-йога</option>
+            <option>Пранаяма &amp; Дыхание</option>
+            <option>Пробное занятие</option>
+          </select>
+          <span class="form-error" data-for="direction"></span>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%">Отправить заявку</button>
+        <div class="form-success" id="formSuccess">✨ Спасибо! Заявка отправлена. Мы свяжемся с вами shortly.</div>
+      </form>
+    </div>
+    <div class="card">
+      <h3>Что дальше?</h3>
+      <p>1. Мы позвоним, чтобы уточнить удобное время.</p>
+      <p>2. Подберём инструктора под ваш уровень.</p>
+      <p>3. Пришлём памятку о первом занятии.</p>
+      <h3 class="mt-3">Контакты для связи</h3>
+      <p>📞 +7 (999) 123-45-67</p>
+      <p>✉️ hello@aurora-yoga.ru</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LEVELS ============ -->
+<section id="levels" class="section">
+  <div class="section-header">
+    <h2>Направления и <span>уровни</span></h2>
+    <p>Программы для любого уровня подготовки.</p>
+  </div>
+  <div class="grid-3">
+    <div class="level-card">
+      <div class="level-icon">🌱</div>
+      <h3>Начинающие</h3>
+      <p>Хатха-йога, базовые асаны, дыхание и расслабление. Мягкое введение в практику.</p>
+    </div>
+    <div class="level-card">
+      <div class="level-icon">🌿</div>
+      <h3>Продолжающие</h3>
+      <p>Виньяса-флоу, динамичные последовательности, углублённая работа с дыханием.</p>
+    </div>
+    <div class="level-card">
+      <div class="level-icon">🌳</div>
+      <h3>Продвинутые</h3>
+      <p>Сложные асаны, пранаяма, медитация и философия йоги. Интенсивная практика.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACTS ============ -->
+<section id="contacts" class="section">
+  <div class="section-header">
+    <h2>Контакты и <span>локации</span></h2>
+    <p>Мы работаем для вас каждый день.</p>
+  </div>
+  <div class="grid-2">
+    <div class="card">
+      <h3>Адреса</h3>
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div>Санкт-Петербург, ул. Рубинштейна, 15<br><span style="color:var(--text-muted);font-size:.9rem">Основная студия</span></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div>Санкт-Петербург, Васильевский остров, 6-я линия, 12<br><span style="color:var(--text-muted);font-size:.9rem">Филиал</span></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">🕒</div>
+        <div>Ежедневно с 07:00 до 22:00</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📞</div>
+        <div>+7 (999) 123-45-67</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">✉️</div>
+        <div>hello@aurora-yoga.ru</div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Социальные сети</h3>
+      <div class="social-links">
+        <a href="#">Instagram студии</a>
+        <a href="#">VK студии</a>
+        <a href="#">Telegram-канал</a>
+      </div>
+      <h3 class="mt-3">Личные аккаунты инструкторов</h3>
+      <div class="social-links">
+        <a href="#">Анна Волкова</a>
+        <a href="#">Мария Соколова</a>
+        <a href="#">Дмитрий Орлов</a>
+      </div>
+      <p style="color:var(--text-muted);margin-top:1.5rem;font-size:.9rem">Подписывайтесь, чтобы быть в курсе расписания и событий.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <p>© 2026 AURORA YOGA — студия йоги и wellness. Все права защищены.</p>
+</footer>
+
+<!-- ============ SCRIPT (FIX #3, #4) ============ -->
+<script>
+/* ============================================================
+   МАСКА ТЕЛЕФОНА +7 (___) ___-__-__
+   ============================================================ */
+function maskPhone(value){
+  let digits = value.replace(/\D/g,'');
+  // Нормализация первой цифры: 8 → 7, 7 остаётся, если нет — добавляем 7
+  if (digits.startsWith('8')) digits = '7' + digits.slice(1);
+  if (!digits.startsWith('7')) digits = '7' + digits;
+  const d = digits.slice(1, 11); // до 10 значащих цифр после +7
+  let out = '+7';
+  if (d.length > 0) out += ' (' + d.slice(0,3);
+  if (d.length >= 3) out += ') ' + d.slice(3,6);
+  if (d.length >= 6) out += '-' + d.slice(6,8);
+  if (d.length >= 8) out += '-' + d.slice(8,10);
+  return out;
+}
+
+/* ============================================================
+   ВАЛИДАЦИЯ И СБРОС ОШИБОК
+   ============================================================ */
+const form         = document.getElementById('bookingForm');
+const nameInput    = document.getElementById('name');
+const phoneInput   = document.getElementById('phone');
+const dirInput     = document.getElementById('direction');
+const successBox   = document.getElementById('formSuccess');
+
+function setError(field, message){
+  field.classList.add('error');
+  const errEl = document.querySelector(`.form-error[data-for="${field.id}"]`);
+  if (errEl) errEl.textContent = message;
+}
+function clearError(field){
+  field.classList.remove('error');
+  const errEl = document.querySelector(`.form-error[data-for="${field.id}"]`);
+  if (errEl) errEl.textContent = '';
+}
+
+/* FIX #3: сброс ошибки при вводе — пользователь сразу видит, что проблема ушла */
+[nameInput, phoneInput, dirInput].forEach(field => {
+  field.addEventListener('input',  () => clearError(field));
+  field.addEventListener('change', () => clearError(field));
+});
+
+/* FIX #4: применяем маску на каждое нажатие клавиши */
+phoneInput.addEventListener('input', (e) => {
+  e.target.value = maskPhone(e.target.value);
+});
+
+/* Сабмит формы */
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  let valid = true;
+
+  // Имя
+  if (nameInput.value.trim().length < 2){
+    setError(nameInput, 'Введите имя (минимум 2 символа)');
+    valid = false;
+  }
+
+  // Телефон — проверяем кол-во цифр
+  const digits = phoneInput.value.replace(/\D/g,'');
+  if (digits.length !== 11){
+    setError(phoneInput, 'Введите номер полностью: +7 (XXX) XXX-XX-XX');
+    valid = false;
+  }
+
+  // Направление
+  if (!dirInput.value){
+    setError(dirInput, 'Выберите направление');
+    valid = false;
+  }
+
+  if (!valid) return;
+
+  // Успех
+  successBox.classList.add('show');
+  form.reset();
+
+  // Автоскрытие тоста через 5 секунд
+  setTimeout(() => successBox.classList.remove('show'), 5000);
+});
+</script>
+
+</body>
+</html>
