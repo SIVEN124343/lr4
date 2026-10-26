@@ -163,6 +163,10 @@ a{text-decoration:none;color:inherit}
   box-shadow:0 0 20px var(--accent-glow);transition:var(--transition);
 }
 .instructor-card:hover .instructor-avatar{box-shadow:0 0 35px var(--accent);transform:scale(1.03)}
+.instructor-avatar img{
+  width:100%;height:100%;object-fit:cover;border-radius:50%;
+  display:block;
+}
 .instructor-name{font-size:clamp(1.1rem,2.3vw,1.35rem);font-weight:500;margin-bottom:.3rem;overflow-wrap:anywhere}
 .instructor-spec{color:var(--accent);font-size:.85rem;font-weight:400;letter-spacing:.5px;text-transform:uppercase;margin-bottom:.7rem}
 .instructor-desc{color:var(--text-muted);font-size:clamp(.85rem,1.8vw,.95rem)}
@@ -205,6 +209,9 @@ a{text-decoration:none;color:inherit}
   margin-bottom:.9rem;
   filter:drop-shadow(0 0 12px var(--accent-glow));
   transition:var(--transition);
+}
+.merch-img img{
+  width:100%;height:100%;object-fit:cover;display:block;
 }
 .merch-card:hover .merch-img{filter:drop-shadow(0 0 20px var(--accent));transform:scale(1.08)}
 .merch-card h3{font-size:clamp(1rem,2vw,1.15rem)}
@@ -347,19 +354,19 @@ a{text-decoration:none;color:inherit}
   </div>
   <div class="grid-3">
     <div class="instructor-card">
-      <div class="instructor-avatar">🧘‍♀️</div>
+      <div class="instructor-avatar"><img src="images/instructor1.jpg" alt="Анна Волкова"></div>
       <div class="instructor-name">Анна Сергеевна Волкова</div>
       <div class="instructor-spec">Виньяса &amp; Хатха</div>
       <p class="instructor-desc">Основатель студии, сертифицированный инструктор (RYT 500). Проводит динамичные и выверенные практики, уделяя внимание выравниванию и дыханию.</p>
     </div>
     <div class="instructor-card">
-      <div class="instructor-avatar">🧘</div>
+      <div class="instructor-avatar"><img src="images/instructor2.jpg" alt="Мария Соколова"></div>
       <div class="instructor-name">Мария Александровна Соколова</div>
       <div class="instructor-spec">Медитация &amp; Инь-йога</div>
       <p class="instructor-desc">Специалист по глубокому расслаблению и работе с вниманием. Помогает найти тишину внутри и восстановить ресурс.</p>
     </div>
     <div class="instructor-card">
-      <div class="instructor-avatar">🌬️</div>
+      <div class="instructor-avatar"><img src="images/instructor3.jpg" alt="Дмитрий Орлов"></div>
       <div class="instructor-name">Дмитрий Игоревич Орлов</div>
       <div class="instructor-spec">Пранаяма &amp; Дыхание</div>
       <p class="instructor-desc">Эксперт по дыхательным техникам. Учит управлять энергией через осознанное дыхание и расширять границы возможностей.</p>
@@ -420,25 +427,25 @@ a{text-decoration:none;color:inherit}
   </div>
   <div class="merch-grid">
     <div class="merch-card">
-      <div class="merch-img">🧘‍♀️</div>
+      <div class="merch-img"><img src="images/merch1.jpg" alt="Коврик для йоги"></div>
       <h3>Коврик для йоги</h3>
       <p>Нескользящий, 6 мм, с логотипом студии.</p>
       <div class="price">4 900 ₽</div>
     </div>
     <div class="merch-card">
-      <div class="merch-img">👕</div>
+      <div class="merch-img"><img src="images/merch2.jpg" alt="Топ для практики"></div>
       <h3>Топ для практики</h3>
       <p>Дышащая ткань, мягкий бирюзовый акцент.</p>
       <div class="price">2 800 ₽</div>
     </div>
     <div class="merch-card">
-      <div class="merch-img">🧥</div>
+      <div class="merch-img"><img src="images/merch3.jpg" alt="Худи AURORA"></div>
       <h3>Худи AURORA</h3>
       <p>Уютное худи с фирменным принтом.</p>
       <div class="price">5 200 ₽</div>
     </div>
     <div class="merch-card">
-      <div class="merch-img">💧</div>
+      <div class="merch-img"><img src="images/merch4.jpg" alt="Бутылка для воды"></div>
       <h3>Бутылка для воды</h3>
       <p>Эко-бутылка 600 мл, матовое покрытие.</p>
       <div class="price">1 500 ₽</div>
