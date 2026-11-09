@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>AURORA YOGA — меню сайта</title>
+<style>
+/* ============ RESET ============ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  background:#0a0f0f;color:#fff;line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+/* ============ TOKENS ============ */
+:root{
+  --bg-dark:#0a0f0f;
+  --bg-card:#111918;
+  --bg-elevated:#16201f;
+  --accent:#3ee6d0;
+  --accent-glow:rgba(62,230,208,0.25);
+  --accent-soft:#2bb8a6;
+  --text-muted:#a0b8b5;
+  --white:#ffffff;
+  --border-light:rgba(62,230,208,0.2);
+  --radius:24px;
+  --radius-sm:16px;
+  --transition:all .3s cubic-bezier(.2,.9,.4,1);
+  --shadow:0 20px 40px -12px rgba(0,0,0,.8);
+}
+
+/* ============ TYPO ============ */
+h1,h2,h3,h4{font-weight:500;letter-spacing:-.02em;line-height:1.15}
+h2{font-size:clamp(1.6rem,4.5vw,3rem);margin-bottom:1.25rem;overflow-wrap:anywhere}
+h2 span{color:var(--accent);font-weight:400}
+h3{font-size:clamp(1.15rem,2.5vw,1.5rem);margin-bottom:.7rem;overflow-wrap:anywhere}
+p{overflow-wrap:anywhere}
+a{text-decoration:none;color:inherit}
+
+.section{padding:clamp(3rem,6vw,5rem) clamp(1rem,4vw,1.5rem);max-width:1280px;margin:0 auto}
+.section-header{margin-bottom:clamp(2rem,4vw,3rem)}
+.section-header p{color:var(--text-muted);font-size:clamp(1rem,2vw,1.2rem);max-width:700px}
+
+/* ============ NAV ============ */
+.navbar{
+  position:sticky;top:0;z-index:1000;
+  background:rgba(10,15,15,.85);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border-light);
+  padding:.75rem clamp(.8rem,3vw,1.5rem);
+}
+.nav-container{
+  max-width:1280px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:.6rem 1rem;
+}
+.logo{font-size:clamp(1.15rem,3vw,1.6rem);font-weight:600;letter-spacing:-.5px;color:#fff;transition:var(--transition)}
+.logo span{color:var(--accent);font-weight:400}
+.logo:hover{text-shadow:0 0 15px var(--accent-glow)}
+.nav-links{display:flex;flex-wrap:wrap;gap:.8rem 1.2rem;align-items:center;list-style:none}
+.nav-links a{font-size:clamp(.75rem,1.6vw,.95rem);color:var(--text-muted);transition:var(--transition);position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1.5px;background:var(--accent);transition:var(--transition)}
+.nav-links a:hover{color:var(--accent)}
+.nav-links a:hover::after{width:100%}
+.nav-links a.active{color:var(--accent)}
+.nav-links a.active::after{width:100%}
+
+/* ============ HERO (страница меню) ============ */
+.menu-hero{
+  padding:clamp(3rem,7vw,4.5rem) clamp(1rem,4vw,1.5rem);
+  text-align:center;
+  background:radial-gradient(circle at 50% 20%,#0f1e1c 0%,#0a0f0f 80%);
+  position:relative;overflow:hidden;
+}
+.menu-hero::before{
+  content:'';position:absolute;width:min(450px,80vw);height:min(450px,80vw);
+  background:radial-gradient(circle,rgba(62,230,208,.08) 0%,transparent 70%);
+  top:-120px;left:50%;transform:translateX(-50%);border-radius:50%;pointer-events:none;
+}
+.menu-hero h1{
+  font-size:clamp(2rem,6vw,4rem);
+  font-weight:500;line-height:1.1;margin-bottom:1rem;
+  overflow-wrap:anywhere;word-break:break-word;
+  position:relative;z-index:2;
+  animation:fadeInUp 1s ease-out;
+}
+.menu-hero h1 span{color:var(--accent);display:block;font-weight:300;text-shadow:0 0 30px var(--accent-glow)}
+.menu-hero p{
+  font-size:clamp(1rem,2.5vw,1.2rem);
+  color:var(--text-muted);
+  margin:0 auto;max-width:600px;
+  overflow-wrap:anywhere;position:relative;z-index:2;
+}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+/* ============ GRIDS ============ */
+.grid-2{display:grid;gap:clamp(1rem,2.5vw,2rem);grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr))}
+
+/* ============ MENU CARDS ============ */
+.menu-card{
+  background:var(--bg-card);border:1px solid var(--border-light);
+  border-radius:var(--radius);padding:clamp(1.2rem,3vw,2rem);
+  transition:var(--transition);backdrop-filter:blur(4px);
+  box-shadow:var(--shadow);display:flex;flex-direction:column;
+  min-width:0;overflow-wrap:anywhere;
+}
+.menu-card:hover{
+  transform:translateY(-6px);border-color:var(--accent);
+  box-shadow:0 25px 35px -10px rgba(62,230,208,.15);
+}
+.menu-card-top{display:flex;align-items:flex-start;gap:.9rem;margin-bottom:.6rem}
+.menu-icon{
+  font-size:clamp(1.6rem,3.5vw,2rem);
+  min-width:2.6rem;height:2.6rem;
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(145deg,#1e2e2b,#0f1a19);
+  border:1.5px solid var(--accent);border-radius:14px;
+  box-shadow:0 0 15px var(--accent-glow);
+  flex-shrink:0;transition:var(--transition);
+}
+.menu-card:hover .menu-icon{box-shadow:0 0 25px var(--accent);transform:scale(1.06)}
+.menu-card h3{margin-bottom:0}
+.menu-card h3 a{color:#fff;transition:var(--transition)}
+.menu-card h3 a:hover{color:var(--accent);text-shadow:0 0 15px var(--accent-glow)}
+.menu-card p{color:var(--text-muted);font-size:clamp(.9rem,1.8vw,.98rem);flex:1;margin-top:.4rem}
+.menu-link{
+  margin-top:1rem;align-self:flex-start;
+  color:var(--accent);font-size:.9rem;font-weight:500;
+  display:inline-flex;align-items:center;gap:.4rem;
+  transition:var(--transition);border-bottom:1px solid transparent;
+}
+.menu-link:hover{border-bottom-color:var(--accent);transform:translateX(4px);text-shadow:0 0 15px var(--accent-glow)}
+
+/* ============ FOOTER ============ */
+.footer{border-top:1px solid var(--border-light);padding:2rem 1.5rem;text-align:center;color:var(--text-muted);font-size:.9rem}
+
+/* ============ SCROLLBAR ============ */
+::-webkit-scrollbar{width:8px}
+::-webkit-scrollbar-track{background:#0a0f0f}
+::-webkit-scrollbar-thumb{background:#1e3a37;border-radius:20px}
+::-webkit-scrollbar-thumb:hover{background:var(--accent)}
+
+/* ============ UTIL ============ */
+.text-accent{color:var(--accent)}
+.mt-2{margin-top:1rem}.mt-3{margin-top:2rem}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="logo">AURORA <span>YOGA</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">На главную</a></li>
+      <li><a href="menu.html" class="active">Меню</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="menu-hero">
+  <h1>Полное <span>меню сайта</span></h1>
+  <p>Все разделы AURORA YOGA на одной странице — выберите то, что вас интересует.</p>
+</header>
+
+<!-- ============ MENU ============ -->
+<main class="section">
+  <div class="grid-2">
+
+    <div class="menu-card">
+      <div class="menu-card-top">
+        <div class="menu-icon">🧘</div>
+        <h3><a href="index.html#about">О студии</a></h3>
+      </div>
+      <p>Философия и история AURORA YOGA: почему мы верим, что йога доступна каждому, и как из небольшого зала на Рубинштейна выросло сообщество из 500+ практикующих.</p>
+      <a class="menu-link" href="index.html#about">Перейти к разделу →</a>
+    </div>
+
+    <div class="menu-card">
+      <div class="menu-card-top">
+        <div class="menu-icon">🧑‍🏫</div>
+        <h3><a href="index.html#instructors">Инструкторы</a></h3>
+      </div>
+      <p>Наша команда: Анна Волкова (Виньяса & Хатха), Мария Соколова (Медитация & Инь-йога) и Дмитрий Орлов (Пранаяма & Дыхание) — профессионалы с многолетним опытом.</p>
+      <a class="menu-link" href="index.html#instructors">Перейти к разделу →</a>
+    </div>
+
+    <div class="menu-card">
+      <div class="menu-card-top">
+        <div class="menu-icon">🏅</div>
+        <h3><a href="index.html#achievements">Достижения</a></h3>
+      </div>
+      <p>Сертификаты инструкторов, звание «Студия года 2023» и отзывы учеников, чья жизнь изменилась благодаря практике.</p>
+      <a class="menu-link" href="index.html#achievements">Перейти к разделу →</a>
+    </div>
+
+    <div class="menu-card">
+      <div class="menu-card-top">
+        <div class="menu-icon">🛍️</div>
+        <h3><a href="index.html#merch">Мерч</a></h3>
+      </div>
+      <p>Фирменные товары для комфортной практики: коврик для йоги, топ, худи AURORA и эко-бутылка для воды.</p>
+      <a class="menu-link" href="index.html#merch">Перейти к разделу →</a>
+    </div>
+
+    <div class="menu-card">
+      <div class="menu-card-top">
+        <div class="menu-icon">🎁</div>
+        <h3><a href="index.html#bonus">Бонусы</a></h3>
+      </div>
+      <p>Бонусная программа студии: бесплатное пробное занятие, месячный абонемент и индивидуальные занятия. Скидки студентам и при покупке на 3 месяца.</p>
+      <a class="menu-link" href="index.html#bonus">Перейти к разделу →</a>
+    </div>
+
+    <div class="menu-card">
+      <div class="menu-card-top">
+        <div class="menu-icon">🌱</div>
+        <h3><a href="index.html#levels">Направления</a></h3>
+      </div>
+      <p>Программы для любого уровня: мягкое введение для начинающих, виньяса-флоу для продолжающих и интенсивная практика для продвинутых.</p>
+      <a class="menu-link" href="index.html#levels">Перейти к разделу →</a>
+    </div>
+
+    <div class="menu-card">
+      <div class="menu-card-top">
+        <div class="menu-icon">📍</div>
+        <h3><a href="index.html#contacts">Контакты</a></h3>
+      </div>
+      <p>Адреса студий на Рубинштейна и Васильевском острове, часы работы, телефон и ссылки на социальные сети инструкторов.</p>
+      <a class="menu-link" href="index.html#contacts">Перейти к разделу →</a>
+    </div>
+
+    <div class="menu-card">
+      <div class="menu-card-top">
+        <div class="menu-icon">✨</div>
+        <h3><a href="index.html#form">Заявка</a></h3>
+      </div>
+      <p>Оставьте заявку на занятие — мы свяжемся с вами в течение 15 минут, подберём инструктора и удобное время.</p>
+      <a class="menu-link" href="index.html#form">Перейти к разделу →</a>
+    </div>
+
+  </div>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <p>© 2026 AURORA YOGA — студия йоги и wellness. Все права защищены.</p>
+</footer>
+
+</body>
+</html>
